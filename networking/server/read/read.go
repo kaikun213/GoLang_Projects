@@ -6,14 +6,15 @@ import (
 	"io/ioutil"
 )
 
-// ReadTextfile returns the content of the given textfile formated as CLI input
-func ReadTextfile(filename string) string {
+// Textfile returns the content of the given textfile formated as CLI input
+func Textfile(filename string) string {
 	var result string
 	dat, err := ioutil.ReadFile(filename)
 	if err != nil {
 		fmt.Printf("Error: %v", err)
 	}
-	var split []byte = ([1]byte{'n'})[0:1]
+	var split = make([]byte, 1)
+	split[0] = '\n'
 	lines := bytes.Split(dat, split)
 
 	for _, line := range lines {
@@ -24,4 +25,5 @@ func ReadTextfile(filename string) string {
 			}
 		}
 	}
+	return result
 }
